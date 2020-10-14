@@ -130,7 +130,7 @@ public class Compleja extends Application {
 		VBox operacionbox = new VBox();
 		operacionbox.setAlignment(Pos.CENTER);
 		operacionbox.setSpacing(5);
-		operacionbox.getChildren().addAll(combo);
+		operacionbox.getChildren().addAll(operacionbox);
 		
 		VBox calculosbox = new VBox();
 		calculosbox.setAlignment(Pos.CENTER);
