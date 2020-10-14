@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 
 public class Compleja extends Application {
 	private DoubleProperty real = new SimpleDoubleProperty(0);
@@ -81,20 +82,26 @@ public class Compleja extends Application {
 		numeroA.setMaxWidth(100);
 		numeroA.setAlignment(Pos.CENTER);
 		
+		TextField numeroB = new TextField();
+		numeroB.setPrefColumnCount(3);
+		numeroB.setMaxWidth(100);
+		numeroB.setAlignment(Pos.CENTER);
+				
+		numeroA.textProperty().bindBidirectional(realProperty(), new NumberStringConverter());
+		numeroB.textProperty().bindBidirectional(imaginarioProperty(), new NumberStringConverter());
+		
 		TextField numeroC = new TextField();
 		numeroC.setPrefColumnCount(3);
 		numeroC.setMaxWidth(100);
 		numeroC.setAlignment(Pos.CENTER);
 		
-		TextField numeroB = new TextField();
-		numeroB.setPrefColumnCount(3);
-		numeroB.setMaxWidth(100);
-		numeroB.setAlignment(Pos.CENTER);
-		
 		TextField numeroD = new TextField();
 		numeroD.setPrefColumnCount(3);
 		numeroD.setMaxWidth(100);
 		numeroD.setAlignment(Pos.CENTER);
+		
+		numeroC.textProperty().bindBidirectional(realProperty(), new NumberStringConverter());
+		numeroD.textProperty().bindBidirectional(imaginarioProperty(), new NumberStringConverter());
 		
 		TextField resultadocomplejoA = new TextField();
 		resultadocomplejoA.setPrefColumnCount(3);
@@ -124,7 +131,7 @@ public class Compleja extends Application {
 		resultadocomplejo.getChildren().addAll(resultadocomplejoA, signo , resultadocomplejoB, letra);
 		
 		calculos = new ComboBox<>();
-		calculos.getItems().addAll(añadir(null), quitar(null));
+		calculos.getItems().addAll(añadir(), quitar(null));
 		calculos.getSelectionModel().selectFirst();
 		
 		VBox operacionbox = new VBox();
