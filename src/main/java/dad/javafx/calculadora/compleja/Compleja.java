@@ -76,6 +76,7 @@ public class Compleja extends Application {
 		
 		Label signo = new Label(" + ");
 		Label letra = new Label(" i");
+		Double primnum, segnum, tercnum, cuarnum;
 		
 		TextField numeroA = new TextField();
 		numeroA.setPrefColumnCount(3);
@@ -88,7 +89,9 @@ public class Compleja extends Application {
 		numeroB.setAlignment(Pos.CENTER);
 				
 		numeroA.textProperty().bindBidirectional(realProperty(), new NumberStringConverter());
+		primnum = Double.parseDouble(numeroA.getText());
 		numeroB.textProperty().bindBidirectional(imaginarioProperty(), new NumberStringConverter());
+		segnum = Double.parseDouble(numeroB.getText());
 		
 		TextField numeroC = new TextField();
 		numeroC.setPrefColumnCount(3);
@@ -101,7 +104,9 @@ public class Compleja extends Application {
 		numeroD.setAlignment(Pos.CENTER);
 		
 		numeroC.textProperty().bindBidirectional(realProperty(), new NumberStringConverter());
+		tercnum = Double.parseDouble(numeroC.getText());
 		numeroD.textProperty().bindBidirectional(imaginarioProperty(), new NumberStringConverter());
+		cuarnum = Double.parseDouble(numeroD.getText());
 		
 		TextField resultadocomplejoA = new TextField();
 		resultadocomplejoA.setPrefColumnCount(3);
@@ -116,12 +121,12 @@ public class Compleja extends Application {
 		HBox calculo1 = new HBox();
 		calculo1.setAlignment(Pos.BASELINE_CENTER);
 		calculo1.setSpacing(5);
-		calculo1.getChildren().addAll(numeroA, signo, numeroC, letra);
+		calculo1.getChildren().addAll(numeroA, signo, numeroB, letra);
 		
 		HBox calculo2 = new HBox();
 		calculo2.setAlignment(Pos.BASELINE_CENTER);
 		calculo2.setSpacing(5);
-		calculo2.getChildren().addAll(numeroB, signo, numeroD, letra);
+		calculo2.getChildren().addAll(numeroC, signo, numeroD, letra);
 		
 		Separator separador = new Separator();
 		
@@ -130,8 +135,11 @@ public class Compleja extends Application {
 		resultadocomplejo.setSpacing(5);
 		resultadocomplejo.getChildren().addAll(resultadocomplejoA, signo , resultadocomplejoB, letra);
 		
+		
+		Compleja numsuperior = new Compleja(primnum, segnum);
+		Compleja nummedio = new Compleja(tercnum, cuarnum);
 		calculos = new ComboBox<>();
-		calculos.getItems().addAll(añadir(), quitar(null));
+		calculos.getItems().addAll(añadir(null), quitar(null));
 		calculos.getSelectionModel().selectFirst();
 		
 		VBox operacionbox = new VBox();
@@ -156,13 +164,16 @@ public class Compleja extends Application {
 		primaryStage.show();
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Compleja a = new Compleja(1, 2);
 		Compleja b = new Compleja(3, 4);
 		Compleja c = a.añadir(b);
 		System.out.println(c);
 		a.setReal(10);
 		System.out.println(c);
+	}*/
+	public static void main(String[] args) {
+		launch(args);
 	}
 
 }
