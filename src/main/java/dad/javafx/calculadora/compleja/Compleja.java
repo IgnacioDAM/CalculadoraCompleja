@@ -1,5 +1,9 @@
-package dad.javafx.calculadora.compleja;
+/*
+ * José Ignacio Pérez Delgado
+ * Clase compleja
+ */
 
+package dad.javafx.calculadora.compleja;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
