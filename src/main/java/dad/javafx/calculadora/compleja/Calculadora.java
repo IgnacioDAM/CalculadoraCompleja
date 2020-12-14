@@ -54,12 +54,6 @@ public class Calculadora extends Application {
 		Bindings.bindBidirectional(numeroA.textProperty(), complejaA.realProperty(), new NumberStringConverter());
 		Bindings.bindBidirectional(numeroB.textProperty(), complejaA.imaginarioProperty(), new NumberStringConverter());
 
-		// HBox del numero complejo 1
-		HBox calculo1 = new HBox();
-		calculo1.setAlignment(Pos.BASELINE_CENTER);
-		calculo1.setSpacing(5);
-		calculo1.getChildren().addAll(numeroA, new Label(" + "), numeroC, new Label(" i"));
-
 		// Numero complejo 2
 		numeroC = new TextField();
 		numeroC.setPrefColumnCount(3);
@@ -74,6 +68,12 @@ public class Calculadora extends Application {
 		Bindings.bindBidirectional(numeroC.textProperty(), complejaB.realProperty(), new NumberStringConverter());
 		Bindings.bindBidirectional(numeroD.textProperty(), complejaB.imaginarioProperty(), new NumberStringConverter());
 
+		// HBox del numero complejo 1
+		HBox calculo1 = new HBox();
+		calculo1.setAlignment(Pos.BASELINE_CENTER);
+		calculo1.setSpacing(5);
+		calculo1.getChildren().addAll(numeroA, new Label(" + "), numeroC, new Label(" i"));
+
 		// Hbox del segundo numero complejo
 		HBox calculo2 = new HBox();
 		calculo2.setAlignment(Pos.BASELINE_CENTER);
@@ -84,13 +84,13 @@ public class Calculadora extends Application {
 		Separator separador = new Separator();
 
 		// Resultado complejo
-		resultado1 = new TextField();
+		resultado1 = new TextField("0");
 		resultado1.setPrefColumnCount(3);
 		resultado1.setMaxWidth(100);
 		resultado1.setAlignment(Pos.CENTER);
 		resultado1.setDisable(true); // para que no se pueda modificar el textfield directamente
 
-		resultado2 = new TextField();
+		resultado2 = new TextField("0");
 		resultado2.setPrefColumnCount(3);
 		resultado2.setMaxWidth(100);
 		resultado2.setAlignment(Pos.CENTER);
@@ -100,25 +100,24 @@ public class Calculadora extends Application {
 				new NumberStringConverter());
 		Bindings.bindBidirectional(resultado2.textProperty(), complejaResultante.imaginarioProperty(),
 				new NumberStringConverter());
-		
-		//Hbox del resultado complejo
+
+		// Hbox del resultado complejo
 		HBox resultadocomplejo = new HBox();
 		resultadocomplejo.setAlignment(Pos.BASELINE_CENTER);
 		resultadocomplejo.setSpacing(5);
 		resultadocomplejo.getChildren().addAll(resultado1, new Label(" + "), resultado2, new Label(" i"));
-		
-		//Vbox de la operacion
+
+		// Vbox de la operacion
 		VBox calculosbox = new VBox();
 		calculosbox.setAlignment(Pos.CENTER);
 		calculosbox.setSpacing(5);
 		calculosbox.getChildren().addAll(calculo1, calculo2, separador, resultadocomplejo);
-		
-		//Hbox que contiene toda la calculadora
+
+		// Hbox que contiene toda la calculadora
 		HBox root = new HBox();
 		root.setAlignment(Pos.BASELINE_CENTER);
 		root.setSpacing(5);
 		root.getChildren().addAll(operacionbox, calculosbox);
-		root.setAlignment(Pos.CENTER);
 
 		Scene escena = new Scene(root, 320, 200);
 
@@ -130,19 +129,19 @@ public class Calculadora extends Application {
 	private void onOperacionAction() {
 		String operacion = calculos.getSelectionModel().getSelectedItem();
 
-		if (operacion.equals("+")) { //Suma
+		if (operacion.equals("+")) { // Suma
 			complejaResultante.realProperty().bind(complejaA.realProperty().add(complejaB.realProperty()));
 
 			complejaResultante.imaginarioProperty()
 					.bind(complejaA.imaginarioProperty().add(complejaB.imaginarioProperty()));
 
-		} else if (operacion.equals("-")) { //Resta
+		} else if (operacion.equals("-")) { // Resta
 			complejaResultante.realProperty().bind(complejaA.realProperty().subtract(complejaB.realProperty()));
 
 			complejaResultante.imaginarioProperty()
 					.bind(complejaA.imaginarioProperty().subtract(complejaB.imaginarioProperty()));
 
-		} else if (operacion.equals("*")) { //Multiplicacion
+		} else if (operacion.equals("*")) { // Multiplicacion
 			complejaResultante.realProperty().bind(complejaA.realProperty().multiply(complejaB.realProperty())
 					.subtract(complejaA.imaginarioProperty().multiply(complejaB.imaginarioProperty())));
 
@@ -150,7 +149,7 @@ public class Calculadora extends Application {
 					.bind(complejaA.realProperty().multiply(complejaB.imaginarioProperty())
 							.add(complejaA.imaginarioProperty().multiply(complejaB.realProperty())));
 
-		} else { //division
+		} else { // division
 			complejaResultante.realProperty()
 					.bind(complejaA.realProperty().multiply(complejaB.realProperty())
 							.add(complejaA.imaginarioProperty().multiply(complejaB.imaginarioProperty())
